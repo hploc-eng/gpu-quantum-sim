@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gpu-quantum-sim"
+version = "0.1.0"
+description = "Reproducible CUDA-Q GPU statevector benchmarks and H2 UCCSD VQE"
+requires-python = ">=3.11"
+authors = [{name = "Research portfolio"}]
+license = {text = "MIT"}
+
+[tool.setuptools.packages.find]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["integration: requires CUDA-Q and/or PySCF", "slow: chemistry or large statevector simulation"]

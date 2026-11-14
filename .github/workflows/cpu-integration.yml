@@ -1,0 +1,29 @@
+# Optional heavy CPU integration workflow: real CUDA-Q circuits and H2 PySCF
+# calculations, no simulators mocked. This is not a GPU benchmark.
+name: cpu-quantum-integration
+on:
+  workflow_dispatch:
+jobs:
+  run:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned full quantum stack
+        run: python -m pip install -r requirements.txt
+      - name: Inspect real CUDA-Q installation
+        run: python -m src.check_api
+      - name: Run all CPU quantum + chemistry tests
+        run: OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 python -m pytest -q
+      - name: CPU-only quick experiment
+        run: |
+          OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 python -m src.ghz_benchmark --quick
+          OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 python -m src.h2_vqe --quick
+          python -m src.build_readme
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cpu-quantum-quick-results
+          path: results/

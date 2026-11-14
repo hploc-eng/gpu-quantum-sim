@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.DS_Store
+.ipynb_checkpoints/
+*.hdf5
+# Real experimental CSV/PNG reports should be committed after successful runs.
+# Avoid committing temporary chemistry inputs or runtime caches.

@@ -1,0 +1,8 @@
+# Shared pins (CUDA-Q itself is selected separately for the local/Colab CUDA version).
+numpy==2.3.4
+scipy==1.16.3
+matplotlib==3.10.7
+pyscf==2.15.0
+openfermion==1.8.1
+openfermionpyscf==0.5
+pytest==9.2.0

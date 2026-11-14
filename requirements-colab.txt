@@ -1,0 +1,4 @@
+# CUDA 12 wheel avoids CUDA 13's newer NVIDIA driver requirement on Colab T4.
+# Do NOT also install the `cudaq` meta-package in the same environment.
+-r requirements-common.txt
+cuda-quantum-cu12==0.16.0.post1
